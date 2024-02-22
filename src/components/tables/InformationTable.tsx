@@ -4,18 +4,10 @@ import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
-import {  useState } from "react";
 
 const InformationTable = () => {
- 
-  const [pageIndex, setPageIndex] = useState(0);
-const pageCount = 10;
 
-
-  const { loading, setIsRefresh, displayInfo, role } = useInformation()
-
-
-
+  const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
   return (
     <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
@@ -149,9 +141,9 @@ const pageCount = 10;
         </table>
 <div className="flex items-center justify-center">
 <PaginationNav1Presentation 
-pageCount={pageCount}
-pageIndex={pageIndex}
-setPageIndex={setPageIndex}
+pageCount={totalPages}
+pageIndex={page}
+setPageIndex={setPage}
   />
 </div>
       </div>

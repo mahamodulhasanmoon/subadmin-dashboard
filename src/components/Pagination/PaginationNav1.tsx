@@ -9,6 +9,7 @@ export function PaginationNav1({
     pageCount,
     pageIndex,
   }:any) {
+    console.log('pageCount',pageCount);
     const renderPageLinks = useCallback(() => {
       if (pageCount === 0) return null;
       const visiblePageButtonCount = 3;

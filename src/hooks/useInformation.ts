@@ -41,6 +41,9 @@ export default function useInformation(acceptedRoutes?: any) {
   const [info, setInfo] = useState<[]>([]);
   const [displayInfo,setDisplayInfo] = useState<[]>([]);
   const [isRefresh, setIsRefresh] = useState(0);
+  const [page,setPage] = useState<any>(1)
+  const [totalPages,setTotalPages]= useState(0)
+  
 
   let url: string;
   useEffect(() => {
@@ -48,11 +51,16 @@ export default function useInformation(acceptedRoutes?: any) {
       setLoading(true);
       try {
         if (role === 'subadmin' || acceptedRoutes?.route === pathname) {
-          url = `information?createdBy=${user._id}`;
-        } else {
-          url = `information?id=${user?.id}`;
+          url = `information?createdBy=${user._id}&page=${page}`;
         }
-        const data = await getData(url);
+        else if(role === 'admin' || acceptedRoutes?.route === pathname) {
+          url = `information?page=${page}`;
+        }
+        else {
+          url = `information?id=${user?.id}&page=${page}`;
+        }
+        const data:any = await getData(url);
+        setTotalPages(data.pages.totalPages);
         setInfo((data as any)?.data);
         setDisplayInfo((data as any)?.data?.filter((item:any) => "email" in item))
         setLoading(false);
@@ -63,7 +71,8 @@ export default function useInformation(acceptedRoutes?: any) {
             todayIncrementPercentage,
             yesterdayIncrementPercentage,
             totalClick,
-            averageLeadData
+            averageLeadData,
+           
             
            
              } =
@@ -99,7 +108,7 @@ export default function useInformation(acceptedRoutes?: any) {
     };
 
     fetchData();
-  }, [user, isRefresh]);
+  }, [user, isRefresh,page,setPage]);
 
   const userId = user?.id;
   useEffect(() => {
@@ -164,5 +173,9 @@ setIsRefresh(Math.random())
     setIsRefresh,
     role,
     clickData,
+    setTotalPages,
+    totalPages,
+    page,
+    setPage
   };
 }
