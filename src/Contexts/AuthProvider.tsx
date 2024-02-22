@@ -168,27 +168,18 @@ const originalUser = {...data?.data,plans:filteredArr}
 
     joinRoom(userId);
 
-   receive('infoUpdate', () => {
-     
-      const audio = new Audio('notification.mp3');
+   receive('infoUpdate', ({data}:any) => {
+   console.log(data);
+     if(!data.email){
+      const audio = new Audio('click.mp3');
       audio.load()
       audio.play()
-      .then(() =>   {
-              setTimeout(() => {
-        const messageAudio = new Audio('message.mp3');
-        messageAudio.load();
-        messageAudio.play()
-          .then(() => {
-            showPushNotification();
-          })
-          .catch(error => {
-            console.error('Error playing message sound:', error);
-          });
-      }, 2000);
-      })
-      .catch(error => {
-        console.error('Autoplay prevented:', error);
-      });
+     }else{
+      const audio = new Audio('message.mp3');
+      audio.load()
+      audio.play()
+     }
+
       showPushNotification()
    
     }); 
