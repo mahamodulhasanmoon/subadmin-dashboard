@@ -1,10 +1,11 @@
 
 import { formatUtcToLocal } from "../../utils/DateFormater";
 import useInformation from "../../hooks/useInformation";
+import { PaginationNav1Presentation } from "../Pagination/Pagination";
 
 
 const ConversionTable = () => {
-  const {displayInfo}= useInformation({route:'/overview'})
+  const {displayInfo,totalPages,setPage,page}= useInformation({route:'/overview'})
 
   return (
     <div className="rounded-sm border  border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -92,6 +93,13 @@ const ConversionTable = () => {
 
     </tbody>
   </table>
+  <div className="flex items-center justify-center">
+<PaginationNav1Presentation 
+pageCount={totalPages}
+pageIndex={page}
+setPageIndex={setPage}
+  />
+</div>
 </div>
 
 
