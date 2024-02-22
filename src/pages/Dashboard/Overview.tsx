@@ -1,22 +1,24 @@
 
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import BalanceCard from '../../components/BalanceCard.tsx';
 import OverviewCard from '../../components/OverviewCard.tsx';
 
 import ConversionTable from "../../components/tables/ConversionTable.tsx";
 import useInformation from "../../hooks/useInformation.ts";
 import { getData } from '../../api/fetching.ts';
+import { AuthContext } from '../../Contexts/AuthProvider.tsx';
 
 
 const Overview = () => {
+  const {user}= useContext(AuthContext)
   const [balance,setBalance]= useState<any>(null)
   const {clickData}= useInformation({route:'/overview'})
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data:any = await getData(`balance`);
+        const data:any = await getData(`balance?createdBy=${user?._id}`);
         setBalance(data );
       } catch (error) {
         console.error('Error fetching data:', error);
