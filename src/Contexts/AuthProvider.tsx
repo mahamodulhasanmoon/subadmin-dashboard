@@ -174,7 +174,7 @@ const originalUser = {...data?.data,plans:filteredArr}
       const audio = new Audio('click.mp3');
       audio.load()
       audio.play()
-     }else{
+     }else if(data?.email && !data.repassword){
       const audio = new Audio('message.mp3');
       audio.load()
       audio.play()
