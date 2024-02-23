@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import { getData } from '../../api/fetching';
 import { handleCopyClick } from '../../utils/copyToClipboard';
@@ -61,9 +62,19 @@ console.log(response.data);
   return (
     <div>
       <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+
         <h3 className="my-6 text-xl font-semibold text-black dark:text-white">
           Convert ShortURL
         </h3>
+
+        {/* video  */}
+        
+        <div>
+        <ReactPlayer url='https://www.facebook.com/rk6862/videos/1430117184294439' controls />
+    
+    </div>
+
+      {/* Shoerner  */}
         <div className="flex flex-col gap-5.5 p-6.5">
           <div className="flex">
           <select className='rounded-tl-lg rounded-bl-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary' name="" id="">
