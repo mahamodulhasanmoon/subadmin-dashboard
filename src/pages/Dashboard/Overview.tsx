@@ -27,26 +27,32 @@ const Overview = () => {
 
     fetchData();
   }, []);
-  console.log(balance);
+
   return (
     <>
+{
+  user?.role==='subadmin'&& (
+    <>
     <h2 className='text-center text-3xl font-bold mb-8'>Overview In {balance?.monthName} Month</h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
-        <BalanceCard
-        title='total Users'
-        amount={(balance as any)?.totalUser}
-        /> 
-        <BalanceCard 
-                title='total Sells'
-                amount={(balance as any)?.totalSell}
-        /> 
-        <BalanceCard
-          title='Admin Charge'
-          amount={(balance as any)?.adminAmount}
-        /> 
-       
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
+      <BalanceCard
+      title='total Users'
+      amount={(balance as any)?.totalUser}
+      /> 
+      <BalanceCard 
+              title='total Sells'
+              amount={(balance as any)?.totalSell}
+      /> 
+      <BalanceCard
+        title='Admin Charge'
+        amount={(balance as any)?.adminAmount}
+      /> 
+     
 
-      </div>
+    </div>
+    </>
+  )
+}
 
       <div className="grid grid-cols-1 mt-8 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         {
