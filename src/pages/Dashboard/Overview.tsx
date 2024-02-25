@@ -14,6 +14,7 @@ const Overview = () => {
   const {user}= useContext(AuthContext)
   const [balance,setBalance]= useState<any>(null)
   const {clickData}= useInformation({route:'/overview'})
+  console.log(clickData);
 
   useEffect(() => {
     const fetchData = async () => {
