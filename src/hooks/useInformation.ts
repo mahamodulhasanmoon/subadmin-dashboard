@@ -8,6 +8,14 @@ import useSocket from './useSocket';
 
 export default function useInformation(acceptedRoutes?: any) {
   const { pathname } = useLocation();
+  const [analytics,setAnalytics]= useState(
+    {
+      totalHits: 0,
+      todayData: 0,
+      yesterdayData: 0,
+      totalData: 0
+  }
+  );
 
   const [clickData, setClickData] = useState([
     {
@@ -46,61 +54,31 @@ export default function useInformation(acceptedRoutes?: any) {
   
 
   let url: string;
+  let analyticsUrl: string;
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         if (role === 'subadmin' || acceptedRoutes?.route === pathname) {
           url = `information?createdBy=${user._id}&page=${page}`;
+          analyticsUrl =  `analytics?createdBy=${user._id}`;
         }
         else if(role === 'admin' || acceptedRoutes?.route === pathname) {
           url = `information?page=${page}`;
+          analyticsUrl = `analytics`;
         }
         else {
           url = `information?id=${user?.id}&page=${page}`;
+          analyticsUrl = `analytics?id=${user?.id}`;
         }
         const data:any = await getData(url);
+        const analyticsData:any = await getData(analyticsUrl)
+        setAnalytics(analyticsData)
         setTotalPages(data.pages.totalPages);
         setInfo((data as any)?.data);
         setDisplayInfo((data as any)?.data?.filter((item:any) => "email" in item))
         setLoading(false);
-        const { 
-            yesterdayDataLength,
-            todayDataLength,
-            thisMonthDataLength,
-            todayIncrementPercentage,
-            yesterdayIncrementPercentage,
-            totalClick,
-            averageLeadData,
-           
-            
-           
-             } =
-          manageCount((data as any)?.data);
           
-      
-        setClickData((prevClickData) => [
-          {
-            ...prevClickData[0],
-            total: totalClick,
-            overviewInPercent:100
-          },
-          {
-            ...prevClickData[1],
-            total: todayDataLength,
-            overviewInPercent: todayIncrementPercentage
-          },
-          {
-            ...prevClickData[2],
-            total: yesterdayDataLength,
-            overviewInPercent:yesterdayIncrementPercentage
-          },
-          {
-            ...prevClickData[3],
-            total: thisMonthDataLength,
-            overviewInPercent: averageLeadData,
-          },
-        ]);
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
@@ -148,19 +126,19 @@ setIsRefresh(Math.random())
   setClickData((prevClickData) => [
     {
       ...prevClickData[0],
-      total: totalClick,
+      total: analytics.totalHits,
     },
     {
       ...prevClickData[1],
-      total: todayDataLength,
+      total: analytics.todayData,
     },
     {
       ...prevClickData[2],
-      total: yesterdayDataLength,
+      total: analytics.yesterdayData,
     },
     {
       ...prevClickData[3],
-      total: thisMonthDataLength,
+      total: analytics.totalData,
         overviewInPercent: averageLeadData,
     },
   ]);
