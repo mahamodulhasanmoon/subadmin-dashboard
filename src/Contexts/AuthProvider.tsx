@@ -42,7 +42,7 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const {receive,joinRoom} = useSocket()
+  const {receive,joinRoom,sendToServer} = useSocket()
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const[role,setRole]= useState<string | null >(null)
@@ -60,6 +60,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         if(localStorage.getItem('access_token')){
           const data:any = await getData(`auth/me`);
+          sendToServer('addUser',data?.data?._id)
 
           if (data.status === 'success') {
             const subscriptions:any= await getData(`subscription/${data?.data?._id}`)
@@ -206,6 +207,16 @@ const originalUser = {...data?.data,plans:filteredArr}
   
       requestNotificationPermission();
     }, []);
+
+    useEffect(() => {
+      const handleBeforeUnload = () => {
+        sendToServer('userDisconnected', user?._id);
+      };
+      window.addEventListener('beforeunload', handleBeforeUnload);
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }, [sendToServer]);
   
   const authInfo: AuthContextProps = {
     user,
