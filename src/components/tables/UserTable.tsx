@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { getData } from "../../api/fetching";
+import { deleteData, getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
 import { getStatusColor } from "../../utils/statusColor";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import toast from "react-hot-toast";
 const filterArr = [
   {
     label: 'All',
@@ -21,9 +22,11 @@ const filterArr = [
 
 
 const UserTable = () => {
+
   const {user}= useContext(AuthContext)
   const [selectedValue, setSelectedValue] = useState<String>(filterArr[0].value)
   const [users, setUsers] = useState([])
+  const [refresh,setRefresh]= useState<any>(0)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,7 +38,28 @@ const UserTable = () => {
     };
 
     fetchData();
-  }, [selectedValue]);
+  }, [selectedValue,refresh]);
+
+  const deleteUserHandler = async (id:string,email:any) => {
+    const deletedMail = prompt('Are you sure you want to delete this user? Enter Email to confirm:');
+    if (deletedMail===email ) {
+      toast.promise(
+         deleteData(`auth/user/${id}`),
+     
+   
+        {
+          loading: 'Deleteing...',
+          success: <b>Successfully User Deleted</b>,
+          error: <b>Plase Try Again</b>,
+        }
+      ).then(()=>  setRefresh(Math.random()))
+     
+     
+     
+    } else {
+      toast.error("please enter email which user you Want to delete")
+    }
+  };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="buttons my-5 flex items-center justify-center gap-2 flex-wrap text-center">
@@ -72,6 +96,9 @@ const UserTable = () => {
             <th scope="col" className="px-6 py-3">
               Created Time
             </th>
+            <th scope="col" className="px-6 py-3">
+              Action
+            </th>
             {/* <th scope="col" className="px-6 py-3">
               Validity
             </th> */}
@@ -106,11 +133,12 @@ const UserTable = () => {
                 </td> */}
                 
                 <td className={`px-6 font-bold py-4 ${getStatusColor(status)}`}>
-               
+                <button onClick={()=>deleteUserHandler(_id,email)} className="bg-danger  btn">Delete</button>
                 {/* {status === 'expired' ?
                 <button className="bg-primary text-white px-3 py-1">Delete  User</button>
                 : status} */}
               </td>
+
                 
 
 

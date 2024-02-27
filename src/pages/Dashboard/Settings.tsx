@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import userThree from '../../images/user/user-03.png';
+import { AuthContext } from '../../Contexts/AuthProvider';
 // import fireToast from '../../hooks/fireToast';
 
 const Settings = () => {
+  const {user} = useContext(AuthContext)
   
 
   return (
@@ -59,7 +62,7 @@ const Settings = () => {
                           name="fullName"
                           id="fullName"
                           placeholder="Devid Jhon"
-                          defaultValue="Devid Jhon"
+                          defaultValue={user?.name}
                         />
                       </div>
                     </div>
@@ -67,17 +70,17 @@ const Settings = () => {
                     <div className="w-full sm:w-1/2">
                       <label
                         className="mb-3 block text-sm font-medium text-black dark:text-white"
-                        htmlFor="phoneNumber"
+                        htmlFor="password"
                       >
                         Password
                       </label>
                       <input
                         className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                         type="password"
-                        name="phoneNumber"
-                        id="phoneNumber"
-                        placeholder="+990 3343 7865"
-                        defaultValue="+990 3343 7865"
+                        name="password"
+                        id="password"
+                        placeholder="********"
+                        required
                       />
                     </div>
                   </div>
@@ -121,7 +124,8 @@ const Settings = () => {
                         name="emailAddress"
                         id="emailAddress"
                         placeholder="devidjond45@gmail.com"
-                        defaultValue="devidjond45@gmail.com"
+                        defaultValue={user?.email}
+                        disabled
                       />
                     </div>
                   </div>
@@ -131,15 +135,15 @@ const Settings = () => {
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
                       htmlFor="Username"
                     >
-                      Username
+                      Account Role
                     </label>
                     <input
                       className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                       type="text"
                       name="Username"
                       id="Username"
-                      placeholder="devidjhon24"
-                      defaultValue="devidjhon24"
+                      placeholder="user"
+                      defaultValue={user?.role=== 'subadmin'? 'admin':'user'}
                       disabled
                     />
                   </div>
