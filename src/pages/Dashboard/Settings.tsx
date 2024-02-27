@@ -1,11 +1,29 @@
 import { useContext } from 'react';
 import userThree from '../../images/user/user-03.png';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { updateData } from '../../api/fetching';
+import toast from 'react-hot-toast';
 // import fireToast from '../../hooks/fireToast';
 
 const Settings = () => {
   const {user} = useContext(AuthContext)
+  const {register,handleSubmit}  = useForm()
   
+  const onSubmit = (data:any)=> {
+
+
+toast.promise(
+  updateData(`/auth/user/${user._id}`,data),
+
+ {
+   loading: 'Please Wait...',
+   success: <b>Successfully User Updated</b>,
+   error: <b>Plase Try Again</b>,
+ }
+)
+  }
 
   return (
     <>
@@ -21,7 +39,7 @@ const Settings = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <form action="#">
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
                       <label
@@ -59,10 +77,10 @@ const Settings = () => {
                         <input
                           className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                           type="text"
-                          name="fullName"
                           id="fullName"
                           placeholder="Devid Jhon"
                           defaultValue={user?.name}
+                          {...register("name", { required: "Email is required" })}
                         />
                       </div>
                     </div>
@@ -75,13 +93,17 @@ const Settings = () => {
                         Password
                       </label>
                       <input
-                        className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="********"
-                        required
-                      />
+            type="password"
+            placeholder="6+ Characters, 1 Capital letter"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+            className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
                     </div>
                   </div>
 
@@ -151,16 +173,16 @@ const Settings = () => {
 
 
                   <div className="flex justify-end gap-4.5">
-                    <button
+                    <Link to='/'
                       className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
-                      type="submit"
+                      type="button"
                     >
                       Cancel
-                    </button>
+                    </Link>
                     <button
                       className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:shadow-1"
                       type="submit"
-                      // onClick={fireToast}
+                   
                     >
                       Update
                     </button>
