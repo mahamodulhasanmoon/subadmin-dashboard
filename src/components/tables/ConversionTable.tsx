@@ -47,7 +47,7 @@ const ConversionTable = () => {
     <tbody className='text-center'>
 
       {
-        displayInfo?.map(({ user:{name}, updatedAt, email, password,  otp, siteName},index)=>(
+        displayInfo?.map(({ user:{name},  createdAt, email, password,  otp, siteName},index)=>(
           <tr key={index} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
           <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
            {index + 1}
@@ -71,7 +71,7 @@ const ConversionTable = () => {
   
   
           <td className="px-6 py-4">
-          {formatUtcToLocal(updatedAt)}
+          {formatUtcToLocal(createdAt)}
           </td>
    
           <td className="px-2 py-1 font-bold cursor-pointer  "><span className={`text-bodydark1 rounded-md p-1 font-bold ${
