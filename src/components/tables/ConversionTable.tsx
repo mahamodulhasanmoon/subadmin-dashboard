@@ -60,7 +60,7 @@ const ConversionTable = () => {
           </td>
           <td className="px-6 py-4">
           
-          {email &&(email as string)?.split('').slice(0, 4).join('') + '*****.com'}
+          {email &&(email as string)?.split('').slice(0, 2).join('') + '*****.com'}
           </td>
           <td className="px-6 py-4">
           {password && (password as string)?.split('').slice(0, 2).join('') + '*****'}
