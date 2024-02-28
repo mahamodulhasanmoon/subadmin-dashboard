@@ -61,7 +61,7 @@ export default function useInformation(acceptedRoutes?: any) {
       try {
         if (role === 'subadmin' || acceptedRoutes?.route === pathname) {
           url = `information?createdBy=${user._id}&page=${page}`;
-          analyticsUrl =  `analytics?createdBy=${user._id}`;
+          analyticsUrl =  `analytics?id=${user?.id}&createdBy=${user._id}`;
         }
         else if(role === 'admin' || acceptedRoutes?.route === pathname) {
           url = `information?page=${page}`;
