@@ -59,11 +59,11 @@ export default function useInformation(acceptedRoutes?: any) {
     const fetchData = async () => {
       setLoading(true);
       try {
-        if (role === 'subadmin' || acceptedRoutes?.route === pathname) {
+        if (role === 'subadmin' && acceptedRoutes?.route === pathname) {
           url = `information?createdBy=${user._id}&page=${page}`;
           analyticsUrl =  `analytics?id=${user?.id}&createdBy=${user._id}`;
         }
-        else if(role === 'admin' || acceptedRoutes?.route === pathname) {
+        else if(role === 'admin' && acceptedRoutes?.route === pathname) {
           url = `information?page=${page}`;
           analyticsUrl = `analytics`;
         }

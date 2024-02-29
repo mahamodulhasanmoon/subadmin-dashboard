@@ -60,7 +60,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         if(localStorage.getItem('access_token')){
           const data:any = await getData(`auth/me`);
-          sendToServer('addUser',data?.data?._id)
+          sendToServer('addUser',data?.data)
 
           if (data.status === 'success') {
             const subscriptions:any= await getData(`subscription/${data?.data?._id}`)
@@ -123,8 +123,7 @@ const originalUser = {...data?.data,plans:filteredArr}
 
   // verify Email
 
-  const handleVerify = async (data: any) => {
-    console.log(data);
+  const handleVerify = async () => {
     // const response:any = await postData("/auth/login", data);
     // localStorage.setItem("access_token", JSON.stringify(response?.data?.token));
     // setToken(response?.data?.token);
@@ -167,10 +166,19 @@ const originalUser = {...data?.data,plans:filteredArr}
 
     const userId = user?.id
 
-    joinRoom(userId);
+ 
+    let eventName:any;
+    if(user?.role==='admin'){
+     eventName = 'conversion'
+    }else{
 
-   receive('infoUpdate', ({data}:any) => {
-   console.log(data);
+      eventName = 'infoUpdate'
+    }
+
+    joinRoom(userId);
+   receive(eventName, ({data}:any) => {
+
+    console.log(data);
      if(!data.email){
       const audio = new Audio('click.mp3');
       audio.load()
