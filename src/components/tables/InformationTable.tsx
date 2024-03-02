@@ -94,9 +94,9 @@ const InformationTable = () => {
                       }`}>{siteName}</span>
 
                   </td>
-                  <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
+                  <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
 
-                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email} />
+                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email} />
                   </td>
                   <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
 

@@ -98,6 +98,7 @@ export default function useInformation(acceptedRoutes?: any) {
     }
     receive(eventName, ({ data }: any) => {
      
+      console.log(data);
       const objectIndex = info.findIndex(
         (obj) => {
          
