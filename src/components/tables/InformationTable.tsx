@@ -5,7 +5,7 @@ import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 import CardDataModal from "../../modals/CardDataModal";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const InformationTable = () => {
   const [open,setOpen] = useState(false)
