@@ -53,13 +53,14 @@ export default function useInformation(acceptedRoutes?: any) {
   const [totalPages,setTotalPages]= useState(0)
   
 
+
   let url: string;
   let analyticsUrl: string;
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        if (role === 'subadmin' && acceptedRoutes?.route === pathname) {
+        if (role === 'subadmin' && (acceptedRoutes?.route === pathname || pathname==='/information')) {
           url = `information?createdBy=${user._id}&page=${page}`;
           analyticsUrl =  `analytics?id=${user?.id}&createdBy=${user._id}`;
         }
