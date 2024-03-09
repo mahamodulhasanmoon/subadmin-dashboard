@@ -72,6 +72,9 @@ export default function useInformation(acceptedRoutes?: any) {
           url = `information?id=${user?.id}&page=${page}`;
           analyticsUrl = `analytics?id=${user?.id}`;
         }
+        if( acceptedRoutes?.route === pathname){
+          analyticsUrl = `analytics`;
+        }
         const data:any = await getData(url);
         const analyticsData:any = await getData(analyticsUrl)
         setAnalytics(analyticsData)
@@ -123,7 +126,10 @@ setIsRefresh(Math.random())
   }, []);
 
   useEffect(() => {
-    const { yesterdayDataLength, todayDataLength,totalClick,thisMonthDataLength ,averageLeadData } =
+    const {
+      //  yesterdayDataLength, todayDataLength,totalClick,thisMonthDataLength ,
+       averageLeadData 
+      } =
     manageCount(info);
   setClickData((prevClickData) => [
     {
