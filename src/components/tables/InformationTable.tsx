@@ -12,7 +12,7 @@ const InformationTable = () => {
 
 
   const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
-  console.log(role);
+
   return (
     <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
       <div className="flex items-center justify-between my-5">
