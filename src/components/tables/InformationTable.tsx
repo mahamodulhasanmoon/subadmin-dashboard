@@ -117,7 +117,7 @@ const InformationTable = () => {
                   </td>
                   <td onClick={() => handleCopyClick(isPasswordHide ? (repassword as string).replace(/^(.{2})(.{1})/, '$1') : repassword)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (repassword as string).replace(/^(.{2})(.{1})/, '$1') : repassword} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (repassword as string)?.replace(/^(.{2})(.{1})/, '$1') : repassword} />
 
                   </td>
 
