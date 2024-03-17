@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 
+
 interface LoginData{
   email: string;
   password: string;
