@@ -2,9 +2,11 @@ import {  useLocation, useNavigate } from 'react-router-dom';
 import { CiLock, CiMail } from 'react-icons/ci';
 import { useForm } from 'react-hook-form';
 import { useContext, useEffect, useState } from 'react';
-
+import {    getUA } from 'react-device-detect';
 import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import parseUserAgent from '../../utils/parseUserAgent';
 
 
 interface LoginData{
@@ -28,10 +30,40 @@ const SignIn = () => {
    
     },[])
 
+    const [deviceInfo, setDeviceInfo] = useState({});
+    const [ipAddress, setIpAddress] = useState('');
+    useEffect(() => {
+      // Fetch IP address
+      axios.get('https://api.ipify.org/?format=json')
+        .then(response => {
+          setIpAddress(response.data.ip);
+        })
+        .catch(error => {
+          console.error('Error fetching IP address:', error);
+        });
+  
+        const {browser,device,os} = parseUserAgent(getUA)
+      // Set device information
+      setDeviceInfo({
+      
+        browser,
+        os,
+        device,
+        ipAddress
+        // Add any other device-specific information you need
+      });
+   }, [ipAddress]);
+
+
   const onSubmit = async (data:LoginData) => {
     try {
       setLoading(true)
-        await handleLogin?.(data)
+      const senitizeData = {
+        ...data,
+        device:deviceInfo
+      }
+      
+        await handleLogin?.(senitizeData)
         setLoading(false)
       return navigate(from, { replace: true });
     } catch (error:any) {
