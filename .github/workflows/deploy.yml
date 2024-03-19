@@ -1,9 +1,9 @@
 on: push
-name: 🚀 Deploy website on push
+name: 🚀 Build subadmin Dashboard
 jobs:
   web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    name: 🎉  Build and Deploy
+    runs-on: self-hosted
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
@@ -17,12 +17,4 @@ jobs:
         run: |
           npm install
           npm run build
-
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-            server: ${{ secrets.USER_DASHBOARD_SERVER }}
-            username: ${{ secrets.USER_DASHBOARD_USER }}
-            password: ${{ secrets.USER_DASHBOARD_PASSWORD  }}
-            protocol: ${{ secrets.USER_DASHBOARD_PROTOCOL }}
-            local-dir: ./dist/
+         
