@@ -108,9 +108,9 @@ const InformationTable = () => {
                   </td>
                   <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
 
-                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email} />
+                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{2})/, '$1') : email} />
                   </td>
-                  <td onClick={() => handleCopyClick(isPasswordHide ? (password as string).replace(/^(.{2})(.{1})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
+                  <td onClick={() => handleCopyClick(isPasswordHide ? (password as string).replace(/^(.{2})(.{2})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
 
                     <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (password as string).replace(/^(.{2})(.{1})/, '$1') : password} />
 
