@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import PaymentModal from '../modals/PaymentModal';
 import ActivationModal from '../modals/ActivationModal';
 import { AuthContext } from '../Contexts/AuthProvider';
+import NoticeModal from '../modals/NoticeModal';
 
 
 
@@ -19,6 +20,7 @@ const DefaultLayout = () => {
   <ActivationModal/>
 )
       }
+        <NoticeModal/>
      
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
