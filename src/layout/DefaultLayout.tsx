@@ -20,7 +20,7 @@ const DefaultLayout = () => {
   <ActivationModal/>
 )
       }
-        <NoticeModal/>
+        {/* <NoticeModal/> */}
      
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
