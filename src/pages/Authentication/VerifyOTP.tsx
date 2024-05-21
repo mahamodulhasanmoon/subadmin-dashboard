@@ -6,14 +6,14 @@ import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
 
 interface LoginData{
-  otp: string;
+  otpCode: string;
  
 }
 const VerifyOTP = () => {
   const [loading,setLoading]= useState(false)
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
-  const {handleVerify,user}:AuthContextProps = useContext(AuthContext)
+  const {handleLoginOTP,user,email}:AuthContextProps = useContext(AuthContext)
   const navigate = useNavigate()
 
     const location = useLocation()
@@ -29,7 +29,7 @@ const VerifyOTP = () => {
   const onSubmit = async (data:LoginData) => {
     try {
       setLoading(true)
-        await handleVerify?.(data)
+        await handleLoginOTP?.({...data,email})
         setLoading(false)
       return navigate(from, { replace: true });
     } catch (error:any) {
@@ -63,12 +63,12 @@ const VerifyOTP = () => {
           <input
             type="text"
             placeholder="Enter your OTP Code"
-            {...register("otp", { required: "Email is required" })}
+            {...register("otpCode", { required: "Email is required" })}
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
           
         </div>
-        {errors.otp && <p className="text-red-500">{errors.otp.message}</p>}
+        {errors.otpCode && <p className="text-red-500">{errors.otpCode.message}</p>}
       </div>
 
 

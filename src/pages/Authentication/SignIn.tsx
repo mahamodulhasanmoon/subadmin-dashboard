@@ -65,7 +65,7 @@ const SignIn = () => {
       
         await handleLogin?.(senitizeData)
         setLoading(false)
-      return navigate(from, { replace: true });
+      return navigate('/verify_otp');
     } catch (error:any) {
       setLoading(false)
       toast.error(error.response.data.error || error.response.data.message || 'something Went Wrong');

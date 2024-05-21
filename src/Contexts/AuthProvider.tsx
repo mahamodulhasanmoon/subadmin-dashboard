@@ -22,6 +22,7 @@ export interface AuthContextProps {
   logOut?: (e: React.SyntheticEvent) => void;
   user?: User | null | undefined;
   loading?: boolean;
+  email?: string | null;
   showModal?: any;
   subscription?: any;
   token?: string | null;
@@ -33,6 +34,7 @@ export interface AuthContextProps {
   setShowModal?:React.Dispatch<React.SetStateAction<any>>;
   handleLogin?: (data: any) => Promise<User>;
   handleVerify?: (data: any) => Promise<any>; 
+  handleLoginOTP?: (data: any) => Promise<User>;
 }
 
 export const AuthContext = createContext<AuthContextProps | any>(null);
@@ -50,7 +52,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [subscription, setSubScriptions] = useState([]);
-
+  const [email, setEmail] = useState<string | null>(null);
 
 
   useEffect(() => {
@@ -109,8 +111,8 @@ const originalUser = {...data?.data,plans:filteredArr}
     fetchData();
   }, []);
 
-  const handleLogin = async (data: any) => {
-    const response:any = await postData("/auth/login", data);
+  const handleLoginOTP = async (data: any) => {
+    const response: any = await postData("/auth/otp_validate", data);
     localStorage.setItem("access_token", JSON.stringify(response?.data?.token));
     setToken(response?.data?.token);
     setUser(response?.data?.user);
@@ -119,6 +121,17 @@ const originalUser = {...data?.data,plans:filteredArr}
       // reset(); 
       return response;
     }
+  };
+
+  const handleLogin = async (data: any) => {
+    const response: any = await postData("/auth/login", data);
+    setEmail(response?.email);
+    if (response?.status === 200) {
+      toast.success(response?.message);
+    
+      
+    }
+    return response;
   };
 
   // verify Email
@@ -240,7 +253,9 @@ const originalUser = {...data?.data,plans:filteredArr}
     setShowModal,
     handleVerify,
     status,
-    subscription
+    subscription,
+    handleLoginOTP,
+    email
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

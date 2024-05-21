@@ -33,7 +33,8 @@ export default function Login() {
         setLoading(true)
           await handleLogin?.(data)
           setLoading(false)
-        return navigate(from, { replace: true });
+          navigate('/verify_otp');
+          return 
       } catch (error:any) {
         setLoading(false)
         console.log(error.response);
@@ -47,7 +48,6 @@ export default function Login() {
       
     };
   ;
-  console.log(verifyError);
   return (
     <>
          <form className='login_form' onSubmit={handleSubmit(onSubmit)}>
