@@ -141,8 +141,8 @@ const InformationTable = () => {
                       <td  className="px-2 py-1 font-bold cursor-pointer ">
                       <div className="relative inline-block">
                           <button
-                            className={`p-2  ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                              }`}
+                                                        className={`p-2  ${(nidInfo as any) && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                                                      } `}
                               onClick={()=> (setNidOpen(state => !state))}
                               >View</button>
     
