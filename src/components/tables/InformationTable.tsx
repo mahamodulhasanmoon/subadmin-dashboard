@@ -158,8 +158,8 @@ const InformationTable = () => {
                       <td  className="px-2 py-1 font-bold cursor-pointer ">
                       <div className="relative inline-block">
                           <button
-                            className={`p-2  ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                              }`}
+                            className={`p-2  ${(paymentInfo as any)?.cardNumber && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                          } `}
                               onClick={()=> (setOpen(state => !state))}
                               >View</button>
     
