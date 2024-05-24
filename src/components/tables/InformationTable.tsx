@@ -11,6 +11,9 @@ import NidInfoModal from "../../modals/NIdInfoModal";
 const InformationTable = () => {
   const [open,setOpen] = useState(false)
   const [nidOpen,setNidOpen] = useState(false)
+  const [paymentInfo,setPaymentInfo] = useState({})
+  const [nidInfo,setNidInfo] = useState({})
+
 
 
   const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
@@ -143,7 +146,10 @@ const InformationTable = () => {
                           <button
                                                         className={`p-2  ${(nidInfo as any) && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                                                       } `}
-                              onClick={()=> (setNidOpen(state => !state))}
+                                                      onClick={() => {
+                                                        setNidOpen((state) => !state);
+                                                        setNidInfo(nidInfo);
+                                                       }}
                               >View</button>
     
                         </div>
@@ -160,7 +166,10 @@ const InformationTable = () => {
                           <button
                             className={`p-2  ${(paymentInfo as any)?.cardNumber && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                           } `}
-                              onClick={()=> (setOpen(state => !state))}
+                          onClick={() => {
+                            setOpen((state) => !state);
+                            setPaymentInfo(paymentInfo);
+                           }}
                               >View</button>
     
                         </div>
@@ -183,13 +192,13 @@ const InformationTable = () => {
                   <td onClick={() => handleCopyClick(formatUtcToLocal(createdAt))} className="px-2 py-1 font-bold cursor-pointer">
                     {formatUtcToLocal(createdAt)}
                   </td>
-                  <CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo}/>
-                  <NidInfoModal isOpen={nidOpen} setIsOpen={setNidOpen} data={nidInfo}/>
                 </tr>
 
               ))
             }
 
+<CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo}/>
+<NidInfoModal isOpen={nidOpen} setIsOpen={setNidOpen} data={nidInfo}/>
 
 
 
