@@ -10,6 +10,8 @@ import SignUp from './pages/Authentication/SignUp';
 import VerifyOTP from './pages/Authentication/VerifyOTP';
 import Auth from './pages/Authentication/Auth';
 import SignIn from './pages/Authentication/SignIn';
+import ErrorPage from './pages/UiElements/ErrorPage';
+import NotFoundPage from './pages/UiElements/NotFoundPage';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -32,12 +34,19 @@ function App() {
       <Routes>
         
         {/* <Route path="/login" element={<Auth />} /> */}
-        <Route path="/signin" element={<SignIn />} />
+
+        {/* commenting path */}
+
+        {/* <Route path="/signin" element={<SignIn />} />
         <Route path="/free_trial" element={<SignUp />} />
         <Route path="/reset-password" element={<SignUp />} />
-        <Route path="/verify_otp" element={<VerifyOTP />} />
+        <Route path="/verify_otp" element={<VerifyOTP />} /> */}
 
-        <Route element={<PrivateRoutes><DefaultLayout /></PrivateRoutes> }>
+        {/* for Maintainece */}
+        <Route path="/" element={<ErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+
+        {/* <Route element={<PrivateRoutes><DefaultLayout /></PrivateRoutes> }>
           <Route index element={<Overview />} />
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
@@ -55,7 +64,7 @@ function App() {
               />
             );
           })}
-        </Route>
+        </Route> */}
 
      
       </Routes>
