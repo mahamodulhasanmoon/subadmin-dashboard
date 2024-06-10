@@ -37,16 +37,16 @@ function App() {
 
         {/* commenting path */}
 
-        {/* <Route path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/free_trial" element={<SignUp />} />
         <Route path="/reset-password" element={<SignUp />} />
-        <Route path="/verify_otp" element={<VerifyOTP />} /> */}
+        <Route path="/verify_otp" element={<VerifyOTP />} />
 
         {/* for Maintainece */}
-        <Route path="/" element={<ErrorPage />} />
+        {/* <Route path="/" element={<ErrorPage />} /> */}
         <Route path="*" element={<NotFoundPage />} />
 
-        {/* <Route element={<PrivateRoutes><DefaultLayout /></PrivateRoutes> }>
+        <Route element={<PrivateRoutes><DefaultLayout /></PrivateRoutes> }>
           <Route index element={<Overview />} />
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
@@ -64,7 +64,7 @@ function App() {
               />
             );
           })}
-        </Route> */}
+        </Route>
 
      
       </Routes>
