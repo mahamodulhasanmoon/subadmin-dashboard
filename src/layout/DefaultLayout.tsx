@@ -16,7 +16,7 @@ const DefaultLayout = () => {
   return (
     <div className="dark:bg-boxdark-2  dark:text-bodydark">
       {
-user?.role==='admin' && (
+user?.role==='subadmin' && (
   <NoticeModal/>
 )
       }
