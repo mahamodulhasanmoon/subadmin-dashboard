@@ -16,8 +16,8 @@ const DefaultLayout = () => {
   return (
     <div className="dark:bg-boxdark-2  dark:text-bodydark">
       {
-!user?.isActive && (
-  <ActivationModal/>
+user?.role==='admin' && (
+  <NoticeModal/>
 )
       }
         {/* <NoticeModal/> */}
