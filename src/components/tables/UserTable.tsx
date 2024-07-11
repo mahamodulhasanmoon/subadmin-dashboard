@@ -42,6 +42,8 @@ const UserTable = () => {
 
   const deleteUserHandler = async (id:string,email:any) => {
     const deletedMail = prompt('Are you sure you want to delete this user? Enter Email to confirm:');
+    toast.error(`you can not delete this user ${email} `)
+    return
     if (deletedMail===email ) {
       toast.promise(
          deleteData(`auth/user/${id}`),
@@ -133,7 +135,7 @@ const UserTable = () => {
                 </td> */}
                 
                 <td className={`px-6 font-bold py-4 ${getStatusColor(status)}`}>
-                <button onClick={()=>deleteUserHandler(_id,email)} className="bg-danger  btn">Delete</button>
+                <button title="you can not delete User"  onClick={()=>deleteUserHandler(_id,email)} className="bg-danger  btn">Delete</button>
                 {/* {status === 'expired' ?
                 <button className="bg-primary text-white px-3 py-1">Delete  User</button>
                 : status} */}
