@@ -73,13 +73,11 @@ const InformationTable = () => {
                 OTP Code
               </th>
           
-                            {
-                (role==='subadmin' || role==='admin') && (
+                     
                   <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                   NID INFO
                  </th>
-                )
-              }
+              
 
 {
                 (role==='subadmin' || role==='admin') && (
@@ -131,8 +129,7 @@ const InformationTable = () => {
 
 
 
-                  {
-                    (role === 'subadmin' || role === 'admin') && (
+                 
                       <td  className="px-2 py-1 font-bold cursor-pointer ">
                       <div className="relative inline-block">
                           <button
@@ -148,8 +145,7 @@ const InformationTable = () => {
     
     
                       </td>
-                    )
-                  }
+                  
                   {/* Card Info */}
                   {
                     (role === 'subadmin' || role === 'admin') && (
