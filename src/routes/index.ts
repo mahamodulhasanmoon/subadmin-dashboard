@@ -3,6 +3,7 @@ import UserManagement from '../pages/Dashboard/subAdmin/UserManagement';
 import ManageLinks from '../pages/Dashboard/subAdmin/ManageLinks';
 import PendingReq from '../pages/Dashboard/PendingReq';
 import ManageSocials from '../pages/Socials/ManageSocial';
+import Shorter from '../pages/Dashboard/Shorter';
 
  const Support =   lazy(() =>import('../components/Support'));
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
@@ -24,9 +25,14 @@ const coreRoutes = [
     component: Information,
   },
   {
-    path: '/shorter',
+    path: '/shorter-request',
     title: 'Shorter',
     component: NewShortReq,
+  },
+  {
+    path: '/shorter',
+    title: 'Shorter',
+    component: Shorter,
   },
   {
     path: '/web_links',

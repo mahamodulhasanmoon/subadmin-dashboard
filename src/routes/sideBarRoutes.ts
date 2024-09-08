@@ -14,7 +14,18 @@ export const sideBarRoutes:Array<any> = [
         title:"Shortener",
         icon: CiLink,
         link:'/shorter',
+    },
+    {
+        title:"Custom Shortner",
+        icon: CiLink,
+        link:'/shorter-request',
         new:true
+    },
+    {
+        title:"Shortener-request",
+        icon: CiLink,
+        link:'/shorter-request',
+        
     },
     {
         title:"Websites",
@@ -54,6 +65,11 @@ export const sideBarAdminRoutes:Array<any> = [
         title:"Shortener",
         icon: CiLink,
         link:'/shorter',
+    },
+    {
+        title:"Custom Shortner",
+        icon: CiLink,
+        link:'/shorter-request',
         new:true
     },
     {
