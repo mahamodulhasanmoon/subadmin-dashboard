@@ -15,7 +15,7 @@ type FormData = {
 export default function NewShortReq() {
   const { user } = useContext(AuthContext);
 
-  const [price] = useState(12); // Base price in USD
+  const [price] = useState(10); // Base price in USD
   const [totalPrice, setTotalPrice] = useState(price);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null); // For error handling
