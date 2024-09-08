@@ -13,7 +13,8 @@ export const sideBarRoutes:Array<any> = [
     {
         title:"Shortener",
         icon: CiLink,
-        link:'/shorter'
+        link:'/shorter',
+        new:true
     },
     {
         title:"Websites",
@@ -52,7 +53,8 @@ export const sideBarAdminRoutes:Array<any> = [
     {
         title:"Shortener",
         icon: CiLink,
-        link:'/shorter'
+        link:'/shorter',
+        new:true
     },
     {
         title:"Websites",

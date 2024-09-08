@@ -13,20 +13,21 @@ type FormData = {
 export default function NewShortReq() {
   const { user } = useContext(AuthContext);
 
-  const [price] = useState(12); // Base price in USD (1200 BDT / 100 BDT per USD)
+  const [price] = useState(13); // Base price in USD (1200 BDT / 100 BDT per USD)
   const [totalPrice, setTotalPrice] = useState(price);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null); // For error handling
 
-  const validExtensions = ['com', 'net', 'org', 'io', 'tech', 'xyz']; // Define valid extensions
+  const validExtensions = ['com', 'net', 'org', 'io', 'tech', 'xyz','online']; // Define valid extensions
 
   const domainPrices: any = {
     com: 10,   // Prices in USD
     net: 12,
     org: 30,
-    io: 3,
+    io: 30,
     tech: 2.5,
     xyz: 2,
+    online:3
   };
 
   const { register, handleSubmit, watch, reset } = useForm<FormData>();

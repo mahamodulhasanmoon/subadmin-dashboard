@@ -246,13 +246,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li key={index}>
                 <NavLink
                   to={routes.link}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-form-stroke duration-300 ease-in-out hover:bg-stroke dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-form-stroke duration-300 ease-in-out hover:bg-stroke dark:hover:bg-meta-4 ${routes.new && 'bg-success'} ${
                     pathname.includes(routes.link) &&
                     'bg-stroke dark:bg-meta-4'
                   }`}
                 >
 <routes.icon />
-{routes.title}
+{routes.title} {routes.new && <span className='bg-danger px-2'>new</span>}
                 </NavLink>
               </li>
              ))
