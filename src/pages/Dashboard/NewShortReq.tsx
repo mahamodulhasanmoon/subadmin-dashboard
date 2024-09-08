@@ -4,6 +4,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import { postData } from '../../api/fetching';
 import toast from 'react-hot-toast';
 import InputField from '../../components/forms/InputField';
+import { handleCopyClick } from '../../utils/copyToClipboard';
 
 type FormData = {
   domainName: string;
@@ -15,7 +16,7 @@ type FormData = {
 export default function NewShortReq() {
   const { user } = useContext(AuthContext);
 
-  const [price] = useState(10); // Base price in USD
+  const [price] = useState(7); // Base price in USD
   const [totalPrice, setTotalPrice] = useState(price);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null); // For error handling
@@ -100,7 +101,8 @@ export default function NewShortReq() {
       To obtain a shortener with a custom domain, please fill out the form and send the money via the link below.
       </h4>
       <div className='my-5'>
-        <span><InputField email={'THieNjvL66a7k8mnRqXozCAoH5CxA17WDx'} userId={user._id}/></span> <span className='mx-5 text-xl text-success font-bold'>Only TRON (TRC20) </span>
+
+        {/* <span><InputField email={'THieNjvL66a7k8mnRqXozCAoH5CxA17WDx'} userId={user._id}/></span> <span className='mx-5 text-xl text-success font-bold'>Only TRON (TRC20) </span> */}
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -135,15 +137,28 @@ export default function NewShortReq() {
           {error && <p className="text-danger mt-2">{error}</p>}
         </div>
         <div>
-          <label htmlFor="paymentNumber" className="block text-gray-700 font-medium mb-2">
-          USDT Binance link :
+        <div>
+          <label htmlFor="paymentNumber" className="m-5 text-xl text-success font-bold mb-5">
+        Pay  USDT ${totalPrice.toFixed(2)}  -  TRON (TRC20)   In Sender Link
+          </label>
+          <input
+            type="text"
+            id="paymentNumber"
+            {...register('paymentNumber', { required: true })}
+            className="w-full rounded-lg mt-10  block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            placeholder='THieNjvL66a7k8mnRqXozCAoH5CxA17WDx'
+            onClick={() => handleCopyClick('THieNjvL66a7k8mnRqXozCAoH5CxA17WDx')}
+          />
+        </div>
+          <label htmlFor="paymentNumber" className="block text-gray-700 mt-5 font-medium mb-2">
+         Dashboard  Email
           </label>
           <input
             type="text"
             id="paymentNumber"
             {...register('paymentNumber', { required: true })}
             className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            placeholder=' USDT Binance link'
+            placeholder='email here'
           />
         </div>
         <div>
