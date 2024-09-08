@@ -91,13 +91,13 @@ export default function NewShortReq() {
   return (
     <div className="p-6 max-w-lg mx-auto rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4 text-danger">Domain Registration Form</h1>
-      <div>
-        <p className="text-lg font-semibold text-danger">
-          Total Price: {loading ? 'Calculating...' : `${totalPrice.toFixed(2)} USD`}
+      <div className='text-success'>
+        <p className="text-lg font-semibold ">
+          Total Price: {loading ? 'Calculating...' : `${totalPrice.toFixed(2)} TRON (TRC20)`}
         </p>
       </div>
       <h4 className="text-danger font-semibold my-10">
-        কাস্টম ডোমেইন দিয়ে শর্টনার নেওয়ার জন্য অবশ্যই ফরমটি পুরন করুন এবং সেন্ড মানি করুন নিচের Link এ
+      To obtain a shortener with a custom domain, please fill out the form and send the money via the link below.
       </h4>
       <div className='my-5'>
         <span><InputField email={'THieNjvL66a7k8mnRqXozCAoH5CxA17WDx'} userId={user._id}/></span> <span className='mx-5 text-xl text-success font-bold'>Only TRON (TRC20) </span>
@@ -112,7 +112,8 @@ export default function NewShortReq() {
             type="text"
             id="domainName"
             {...register('domainName', { required: true })}
-            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+            className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            placeholder='type Domain Name Without Extension'
           />
         </div>
         <div>
@@ -122,7 +123,7 @@ export default function NewShortReq() {
           <select
             id="extension"
             {...register('extension', { required: true })}
-            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+            className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           >
             <option value="">Select domain extension</option>
             {validExtensions.map(ext => (
@@ -131,17 +132,18 @@ export default function NewShortReq() {
               </option>
             ))}
           </select>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {error && <p className="text-danger mt-2">{error}</p>}
         </div>
         <div>
           <label htmlFor="paymentNumber" className="block text-gray-700 font-medium mb-2">
-            Payment Number:
+          USDT Binance link :
           </label>
           <input
             type="text"
             id="paymentNumber"
             {...register('paymentNumber', { required: true })}
-            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+            className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            placeholder=' USDT Binance link'
           />
         </div>
         <div>
@@ -152,7 +154,8 @@ export default function NewShortReq() {
             type="text"
             id="trxID"
             {...register('trxID', { required: true })}
-            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+            className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            placeholder=' Transaction ID:'
           />
         </div>
 
