@@ -33,13 +33,13 @@ export default function NewShortReq() {
   const extensionValue = watch('extension');
 
   const handleDomainChange = () => {
-    if (!validExtensions.includes(extensionValue.toLowerCase())) {
+    if (!validExtensions.includes(extensionValue?.toLowerCase())) {
       setError('Invalid domain extension. Please select a valid one from the dropdown.');
       setTotalPrice(price); // Reset total price
       return;
     }
 
-    const additionalPrice: any = domainPrices[extensionValue.toLowerCase()] || 0;
+    const additionalPrice: any = domainPrices[extensionValue?.toLowerCase()] || 0;
 
     setError(null); // Clear error if the extension is valid
 
