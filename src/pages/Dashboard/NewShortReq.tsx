@@ -5,6 +5,7 @@ import { postData } from '../../api/fetching';
 import toast from 'react-hot-toast';
 import InputField from '../../components/forms/InputField';
 import { handleCopyClick } from '../../utils/copyToClipboard';
+import ReactPlayer from 'react-player';
 
 type FormData = {
   domainName: string;
@@ -91,6 +92,14 @@ export default function NewShortReq() {
 
   return (
     <div className="p-6 max-w-lg mx-auto rounded-lg shadow-lg">
+        {/* video  */}
+        
+        <div>
+        <ReactPlayer  url='https://fb.watch/utK1GM0HKt' controls />
+    
+    </div>
+
+
       <h1 className="text-2xl font-bold mb-4 text-danger">Domain Registration Form</h1>
       <div className='text-success'>
         <p className="text-lg font-semibold ">
