@@ -139,7 +139,7 @@ export default function NewShortReq() {
         <div>
         <div>
           <label htmlFor="paymentNumber" className="m-5 text-xl text-success font-bold mb-5">
-        Pay  USDT ${totalPrice.toFixed(2)}  -  TRON (TRC20)   In Sender Link
+        Pay  USDT ${totalPrice.toFixed(2)}  -  TRON (TRC20)  
           </label>
           <input
             type="text"
