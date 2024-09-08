@@ -7,7 +7,7 @@ import ManageSocials from '../pages/Socials/ManageSocial';
  const Support =   lazy(() =>import('../components/Support'));
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
 const Information = lazy(() => import('../pages/Dashboard/Information'));
-const Shorter = lazy(() => import('../pages/Dashboard/Shorter'));
+const NewShortReq = lazy(() => import('../pages/Dashboard/NewShortReq'));
 const WebLinks = lazy(() => import('../pages/Dashboard/WebLinks'));
 const Notices = lazy(() => import('../pages/Dashboard/Notice'));
 const Settings = lazy(() => import('../pages/Dashboard/Settings'));
@@ -26,7 +26,7 @@ const coreRoutes = [
   {
     path: '/shorter',
     title: 'Shorter',
-    component: Shorter,
+    component: NewShortReq,
   },
   {
     path: '/web_links',
