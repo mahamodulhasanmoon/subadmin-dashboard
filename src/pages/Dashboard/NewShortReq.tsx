@@ -95,7 +95,7 @@ export default function NewShortReq() {
         {/* video  */}
         
         <div>
-        <ReactPlayer  url='https://fb.watch/utK1GM0HKt' controls />
+        <ReactPlayer  url='https://fb.watch/utQbmvGpds' controls />
     
     </div>
 
