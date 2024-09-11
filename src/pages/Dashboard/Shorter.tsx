@@ -6,6 +6,7 @@ import { handleCopyClick } from '../../utils/copyToClipboard';
 import toast from 'react-hot-toast';
 import CompLoader from '../../common/Loader/CompLoader';
 import axios from 'axios';
+import ShortnerList from './ShortnerList';
 
 export default function Shorter() {
   const [fullUrl, setfullUrls] = useState('');
@@ -73,6 +74,7 @@ console.log(response.data);
         <ReactPlayer url='https://www.facebook.com/rk6862/videos/1430117184294439' controls />
     
     </div>
+    <ShortnerList/>
 
       {/* Shoerner  */}
         <div className="flex flex-col gap-5.5 p-6.5">
