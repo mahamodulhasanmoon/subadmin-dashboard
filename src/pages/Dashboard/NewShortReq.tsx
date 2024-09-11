@@ -147,10 +147,22 @@ export default function NewShortReq() {
           <input
             type="text"
             id="paymentNumber"
-            {...register('paymentNumber', { required: true })}
             className="w-full rounded-lg mt-5 block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none"
             placeholder='723995012'
             onClick={() => handleCopyClick('723995012')}
+          />
+        </div>
+        <div>
+          <label htmlFor="paymentNumber" className="block text-gray-700 font-medium mb-2">
+            Skypee URL
+          </label>
+          <input
+            type="text"
+            id="paymentNumber"
+            {...register('paymentNumber', { required: true })}
+            className="w-full rounded-lg mt-5 block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none"
+            placeholder='Skypee URl'
+          
           />
         </div>
 
