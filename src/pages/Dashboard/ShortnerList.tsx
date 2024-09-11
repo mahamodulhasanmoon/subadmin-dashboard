@@ -22,7 +22,7 @@ export default function ShortnerList() {
     const fetchData = async () => {
       try {
         const response = await getData(`shortlinks/request?user=${user._id}`);
-        setShortData(response.data);
+        setShortData(response?.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
