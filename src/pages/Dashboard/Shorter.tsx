@@ -71,7 +71,8 @@ console.log(response.data);
         {/* video  */}
         
         <div>
-        <ReactPlayer url='https://www.facebook.com/rk6862/videos/1430117184294439' controls />
+        {/* <ReactPlayer url='https://www.facebook.com/rk6862/videos/1430117184294439' controls /> */}
+        <h2 className='flex gap-5 text-2xl  items-center mb-10'><span>check Video Tutorial</span> <Link to={`https://www.facebook.com/rk6862/videos/1430117184294439`}><button className='bg-primary px-6 py-2'> Click Here</button></Link></h2>
     
     </div>
     <ShortnerList/>

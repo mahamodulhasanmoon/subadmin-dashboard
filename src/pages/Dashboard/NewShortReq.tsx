@@ -7,6 +7,8 @@ import toast from 'react-hot-toast';
 import InputField from '../../components/forms/InputField';
 import { handleCopyClick } from '../../utils/copyToClipboard';
 import ReactPlayer from 'react-player';
+import Button2 from '../../components/Pagination/Button2';
+import { Link } from 'react-router-dom';
 
 type FormData = {
   domainName: string;
@@ -103,7 +105,8 @@ export default function NewShortReq() {
     <div className="p-6 max-w-lg mx-auto rounded-lg shadow-lg">
       {/* Video Section */}
       <div>
-        <ReactPlayer url='https://fb.watch/utQbmvGpds' controls />
+        {/* <ReactPlayer url='https://fb.watch/utQbmvGpds' controls /> */}
+        <h2 className='flex gap-5 text-2xl  items-center mb-10'><span>check Video Tutorial</span> <Link to={`https://fb.watch/utQbmvGpds`}><button className='bg-primary px-6 py-2'> Click Here</button></Link></h2>
       </div>
 
       <h1 className="text-2xl font-bold mb-4 text-danger">Domain Registration Form</h1>
@@ -141,14 +144,17 @@ export default function NewShortReq() {
         </div>
 
         <div>
-          <label htmlFor="paymentNumber" className="m-5 text-xl text-success font-bold mt-5">
-            Pay USDT ${totalPrice.toFixed(2)} - TRON (TRC20)
+          <label htmlFor="paymentNumber" className="m-5 text-xl text-success font-bold pt-5">
+            Pay USDT ${totalPrice.toFixed(2)} - TRON (TRC20)  Binance 
+          </label> <br />
+          <label  htmlFor="paymentNumber" className="m-5 mt-10  font-bold ">
+           Admin Binance ID - 723995012
           </label>
           <input
             type="text"
             id="paymentNumber"
-            className="w-full rounded-lg mt-5 block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none"
-            placeholder='723995012'
+            className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none"
+            placeholder='Click To Copy admin Binance ID'
             onClick={() => handleCopyClick('723995012')}
           />
         </div>
