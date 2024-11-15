@@ -51,7 +51,7 @@ const WebTable = () => {
 
         {
           linksTypeArr.map(({ label, value }, index) => (
-            <button key={index} className={`inline-flex rounded items-center px-10 justify-center   py-2 text-center font-medium hover:bg-opacity-90 ${value === selectedValue ? 'text-white bg-primary' : 'text-stroke bg-body'}`} value={value}
+            <button key={index} className={`inline-flex rounded items-center px-10 justify-center   py-2 text-center font-medium hover:bg-opacity-90 ${value === selectedValue ? 'text-white bg-primary' : 'text-stroke bg-body'} ${  label ==='Google' &&'bg-danger'} `} value={value}
               onClick={() => (setSelectedValue(value))}
             >{label}</button>
           ))

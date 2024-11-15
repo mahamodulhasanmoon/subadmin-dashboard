@@ -1,11 +1,13 @@
 import { formatDate } from "../utils/DateFormater";
 
 export const linksTypeArr = [
+    { value: 'Google', label: 'Google' },
     { value: 'eros', label: 'Eros' },
     { value: 'mega', label: 'Mega' },
     { value: 'PD', label: 'PD' },
     { value: 'Skip', label: 'Skip' },
     { value: 'tryst', label: 'Tryst' },
+   
   ];
 
   export const categoryLinkArr = [
@@ -16,7 +18,13 @@ export const linksTypeArr = [
   ];
 
  export const  createSubData =[
-    
+    {
+        site: "Google",
+        category: ['login'],
+        startDate: formatDate(new Date(Date.now())),
+        endDate: formatDate(new Date(Date.now() + 30*24*60*60*1000)),
+        status: "trial"
+    },
 
     {
         site: "mega",
