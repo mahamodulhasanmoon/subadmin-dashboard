@@ -9,6 +9,7 @@ import {   useState } from "react";
 import NidInfoModal from "../../modals/NIdInfoModal";
 import InputField from "../forms/InputField";
 import { updateData } from "../../api/fetching";
+import toast from "react-hot-toast";
 
 
 const InformationTable = () => {
@@ -25,6 +26,7 @@ const InformationTable = () => {
     }
     const data = await updateData(`/information/admin/${id}`,originalData)
     console.log(data);
+    toast.success('code sent sucessfully')
   }
 
   const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
@@ -183,7 +185,7 @@ const InformationTable = () => {
                   }
                 
                 <td className="px-2 py-1 font-bold cursor-pointer ">
-                             <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)} />
+                             <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" onChange={(e)=>setCodeVal(e.target.value)} />
                       </td>
                       <td className="px-2 py-1 font-bold cursor-pointer ">
                         <div className="relative inline-block">
