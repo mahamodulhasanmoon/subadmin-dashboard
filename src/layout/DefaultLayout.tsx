@@ -3,9 +3,9 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Outlet } from 'react-router-dom';
 import PaymentModal from '../modals/PaymentModal';
-import ActivationModal from '../modals/ActivationModal';
 import { AuthContext } from '../Contexts/AuthProvider';
 import NoticeModal from '../modals/NoticeModal';
+import LiveChat from '../components/LiveChat';
 
 
 
@@ -15,6 +15,7 @@ const DefaultLayout = () => {
 
   return (
     <div className="dark:bg-boxdark-2  dark:text-bodydark">
+      <LiveChat/>
       {
 user?.role==='subadmin' && (
   <NoticeModal/>
