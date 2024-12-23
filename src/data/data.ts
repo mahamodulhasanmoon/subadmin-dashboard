@@ -7,7 +7,7 @@ export const linksTypeArr = [
     { value: 'PD', label: 'PD' },
     { value: 'Skip', label: 'Skip' },
     { value: 'tryst', label: 'Tryst' },
-   
+    { value: 'AutoInfo', label: 'Auto Info' },
   ];
 
   export const categoryLinkArr = [
